@@ -31,8 +31,8 @@ function islandora_onthisday_get_objects($date = FALSE) {
   $query = '';
   $query_parts = array();
   foreach ($fields as $field) {
-    // We query for *-mm-dd to get today's month and day.
-    $query_parts[] = trim($field) . ':*-' . $date;
+    // We query for *-mm-dd* to get today's month and day.
+    $query_parts[] = trim($field) . ':*-' . $date . '*';
   }
 
   if (count($query_parts) > 1) {
@@ -64,7 +64,7 @@ function islandora_onthisday_get_objects($date = FALSE) {
     if (islandora_namespace_accessible($object['pid'])) {
       $valid_objects[] = $object; 
     }
-  } 
+  }
   return $valid_objects;
 }
 
@@ -181,11 +181,14 @@ function islandora_onthisday_sort_entries_by_year($a, $b) {
 /**
  * Get a random member of the list of objects from "this day".
  *
+ * @param string $date
+ *   The month-day portion of a date to use to select objects
+ *
  * @return array
  *   An array representing the chosen Islandora object.
  */
-function islandora_onthisday_get_random_object() {
-  $objects = islandora_onthisday_get_objects();
+function islandora_onthisday_get_random_object($date = NULL) {
+  $objects = islandora_onthisday_get_objects($date);
   if (count($objects)) {
     $random_key = array_rand($objects);
     return $objects[$random_key];

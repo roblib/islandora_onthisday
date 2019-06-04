@@ -115,6 +115,13 @@ function islandora_onthisday_admin_settings() {
       ),
     ),
   );
+  $form['islandora_onthisday_date_for_block'] = array(
+    '#type' => 'textfield',
+    '#title' => t('A Date to use for the on this day block.'),
+    '#default_value' => variable_get('islandora_onthisday_date_for_block', ''),
+    '#description' => t('The month-day portion of a date to use for the onthisday block.  
+    Leave this blank for original functionality.'),
+  );
   $form['islandora_onthisday_cache_data'] = array(
     '#type' => 'checkbox',
     '#title' => t('Cache list of daily objects'),
@@ -192,7 +199,9 @@ function islandora_onthisday_block_view($delta = '') {
   switch ($delta) {
     case 'islandora_onthisday_random':
       module_load_include('inc', 'islandora_onthisday', 'includes/utilities');
-      if ($object = islandora_onthisday_get_random_object()) {
+      $date = variable_get('islandora_onthisday_date_for_block', '');
+      $date = $date == '' ? NULL : $date;
+      if ($object = islandora_onthisday_get_random_object($date)) {
         drupal_add_css(drupal_get_path('module', 'islandora_onthisday') . '/css/islandora_onthisday.css');
 
         $links_markup = '';
