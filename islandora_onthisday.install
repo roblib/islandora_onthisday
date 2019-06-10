@@ -21,6 +21,8 @@ function islandora_onthisday_uninstall() {
     'islandora_onthisday_test_dates_enable',
     'islandora_onthisday_show_debugging_metadata',
     'islandora_onthisday_see_more_link',
+    'islandora_onthisday_datastream',
+    'islandora_onthisday_date_for_block',
   );
   array_walk($variables, 'variable_del');
 }

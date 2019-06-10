@@ -122,6 +122,12 @@ function islandora_onthisday_admin_settings() {
     '#description' => t('The month-day portion of a date to use for the onthisday block.  
     Leave this blank for original functionality.'),
   );
+  $form['islandora_onthisday_datastream'] = array(
+    '#type' => 'textfield',
+    '#title' => t('The datastream to display.'),
+    '#default_value' => variable_get('islandora_onthisday_datastream', 'TN'),
+    '#description' => t('The datastream to display in the block or view, usually TN or JPG.'),
+  );
   $form['islandora_onthisday_cache_data'] = array(
     '#type' => 'checkbox',
     '#title' => t('Cache list of daily objects'),

@@ -16,9 +16,9 @@ function islandora_onthisday_preprocess_islandora_onthisday_gallery(array &$vari
   $variables['rss_icon_path'] = '../' . $path . '/images/rss.png';
   $variables['rss_icon_alt'] = t("RSS feed");
   $variables['header'] = token_replace(variable_get('islandora_onthisday_header', ''));
-
+  $dsid = variable_get('islandora_onthisday_datastream', 'TN');
   foreach ($variables['islandora_objects'] as &$object) {
-    $object['thumb_link'] = url("islandora/object/" . $object['pid'] . "/datastream/TN/view");
+    $object['thumb_link'] = url("islandora/object/" . $object['pid'] . "/datastream/$dsid/view");
     $object['title_link'] = url("islandora/object/" . $object['pid']);
     $object['collections_label'] = (count($object['collections']) > 1) ? t('Collections') : t('Collection');
     if (!variable_get('islandora_onthisday_show_collections', 0)) {
@@ -34,8 +34,9 @@ function islandora_onthisday_preprocess_islandora_onthisday_gallery(array &$vari
  *   The variables passed in from the theming layer.
  */
 function islandora_onthisday_preprocess_islandora_onthisday_object(array &$variables) {
+  $dsid = variable_get('islandora_onthisday_datastream', 'TN');
   $variables['islandora_object']['thumb_link'] = url("islandora/object/" .
-    $variables['islandora_object']['pid'] . "/datastream/TN/view");
+    $variables['islandora_object']['pid'] . "/datastream/$dsid/view");
   $variables['islandora_object']['title_link'] = url("islandora/object/" .
     $variables['islandora_object']['pid']);
 }
